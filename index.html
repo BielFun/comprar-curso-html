@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>Comprar Curso HTML</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  background: #080808;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 430px;
+  background: #141414;
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 0 30px #ff000018;
+}
+
+.logo {
+  color: #ff3030;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+h1 {
+  font-size: 29px;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #c5c5c5;
+  line-height: 1.6;
+}
+
+.preco {
+  margin: 25px 0;
+  font-size: 38px;
+  font-weight: bold;
+  color: #ff3535;
+}
+
+.preco small {
+  font-size: 14px;
+  color: #aaa;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #090909;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: #ed2525;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+.pix {
+  display: none;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #383838;
+}
+
+.codigo {
+  background: #080808;
+  border: 1px solid #383838;
+  border-radius: 10px;
+  padding: 12px;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  color: #eee;
+  margin: 12px 0;
+}
+
+.aviso {
+  font-size: 12px;
+  color: #999;
+  margin-top: 20px;
+}
+
+.sucesso {
+  display: none;
+  color: #ff6464;
+  margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+<main class="card">
+  <div class="logo">CURSO DIGITAL</div>
+
+  <h1>Aprenda a criar seu próprio site HTML</h1>
+
+  <p>
+    Aprenda os primeiros passos para montar uma página
+    HTML e publicar seu projeto na internet.
+  </p>
+
+  <div class="preco">
+    R$ 5,00
+    <small>pagamento único</small>
+  </div>
+
+  <label for="email">Seu e-mail</label>
+  <input
+    type="email"
+    id="email"
+    placeholder="voce@email.com"
+    autocomplete="email"
+    required
+  >
+
+  <button onclick="mostrarPagamento()">
+    CONTINUAR PARA O PAGAMENTO
+  </button>
+
+  <section class="pix" id="pagamento">
+    <h2>Pagamento via Pix</h2>
+
+    <p>1. Copie o código Pix abaixo.</p>
+    <p>2. Abra o aplicativo do seu banco e escolha Pix Copia e Cola.</p>
+    <p>3. Confira o nome do destinatário e o valor antes de pagar.</p>
+
+    <div class="codigo" id="codigoPix">00020101021226540014BR.GOV.BCB.PIX0132gabrielpferreiramoraes@gmail.com52040000530398654045.005802BR5915Gabriel Patryck6006BRASIL62070503***6304C3DB</div>
+
+    <button onclick="copiarPix()">COPIAR CÓDIGO PIX</button>
+
+    <p class="aviso">
+      Após o pagamento, o envio do curso será feito para o e-mail
+      informado em até 1 dia útil após a confirmação do pagamento.
+    </p>
+
+    <p class="aviso">
+      Esta página não confirma pagamentos automaticamente.
+      O código Pix precisa ser validado antes de ser utilizado.
+    </p>
+
+    <p class="sucesso" id="mensagem"></p>
+  </section>
+</main>
+
+<script>
+function mostrarPagamento() {
+  const email = document.getElementById("email");
+
+  if (!email.checkValidity()) {
+    email.reportValidity();
+    return;
+  }
+
+  document.getElementById("pagamento").style.display = "block";
+  document.getElementById("pagamento").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+async function copiarPix() {
+  const codigo = document.getElementById("codigoPix").innerText;
+  const mensagem = document.getElementById("mensagem");
+
+  try {
+    await navigator.clipboard.writeText(codigo);
+    mensagem.textContent = "Código copiado! Confira o valor e o destinatário no seu banco.";
+  } catch (erro) {
+    mensagem.textContent = "Selecione e copie manualmente o código Pix.";
+  }
+
+  mensagem.style.display = "block";
+}
+</script>
+</body>
+</html>
